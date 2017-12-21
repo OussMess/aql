@@ -1,9 +1,7 @@
 package session;/* Created by Oussama on 14/12/2017. */
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class ConnectDbImpl implements ConnectDb{
     private Connection con;
@@ -50,6 +48,20 @@ public class ConnectDbImpl implements ConnectDb{
             return st;
         }
 
+    }
+    public ArrayList getComments(String username){
+        ArrayList<String> comments = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement("select * from comments_users where username=?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                comments.add(rs.getString(2));
+            }
+        }
+        catch (Exception e){}
+
+        return comments;
     }
 
 }

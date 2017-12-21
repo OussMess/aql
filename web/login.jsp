@@ -8,10 +8,10 @@
         <title>Page d'authentification</title>
     </head>
     <body>
+    <a href="guest.html" >Guest Page</a>
     <center><h1><u>Page d'authentification</u></h1></center>
     <center>
-
-        <form action="Login" method="POST">
+        <form action="login" method="POST">
             <table align="center">
                 <tr>
                     <th align="right">Nom d'utilisateur:</th>

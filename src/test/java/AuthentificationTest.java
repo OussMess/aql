@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import session.ConnectDb;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -54,6 +56,13 @@ public class AuthentificationTest {
 
         assertTrue(login.isCorrectLoginPassword(username, password));
         assertFalse(login.isCorrectLoginPassword(usernameCorrect, passwordNotCorrect));
+    }
+    @Test
+    public void testSelenuim() throws Exception{
+
+        System.setProperty("webdriver.chrome.driver", "/Users/Mac/Downloads/chromedriver");
+        WebDriver webDriver = new ChromeDriver();
+        webDriver.navigate().to("https://www.google.com/");
     }
 
 }

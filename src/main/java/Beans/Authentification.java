@@ -18,5 +18,8 @@ public class Authentification {
     public boolean isCorrectLogin(String login ){
         return connectDb.checkUsername(login);
     }
+    public ArrayList getComments(String username){
+        return  connectDb.getComments(username);
+    }
 
 }

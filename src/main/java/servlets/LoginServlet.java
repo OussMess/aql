@@ -1,6 +1,7 @@
 package servlets;/* Created by Oussama on 11/12/2017. */
 
 import Beans.Authentification;
+import session.ConnectDbImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/login")
+@WebServlet(name ="login", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 
     private final static String BIENVENUE_PAGE = "/WEB-INF/bienvenue.jsp";
@@ -18,6 +19,9 @@ public class LoginServlet extends HttpServlet {
     private final static String LOGIN_PAGE = "/login.jsp";
 
     private Authentification loggin = new Authentification();
+    {
+        loggin.setConnectBD(new ConnectDbImpl());
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,6 +34,8 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         if(loggin.isCorrectLoginPassword(username, password)){
+            req.setAttribute("username", username);
+            req.setAttribute("comments", loggin.getComments(username));
             this.getServletContext().getRequestDispatcher(BIENVENUE_PAGE).forward(req, resp);
             return;
         }
